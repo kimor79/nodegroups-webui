@@ -1,0 +1,82 @@
+.man-page {
+	-moz-background-clip: border;
+	-moz-background-inline-policy: continuous;
+	-moz-background-origin: padding;
+	background: #EDF5FF none repeat scroll 0 0;
+}
+
+.dialog label {
+	display: block;
+	float: left;
+	width: 45%;
+	clear: left;
+}
+
+.clear {
+	clear: both;
+}
+
+.clickable {
+	cursor: pointer;
+	cursor: hand;
+}
+
+label {
+	font-weight: bold;
+}
+
+#iframeDownload {
+	visibility: hidden;
+}
+
+#divNodeGroupDetailsForm_c.yui-dialog {
+	position:relative;
+}
+
+#divNodegroupPreviewForm_c.yui-dialog {
+	position:relative;
+}
+
+#textareaNodeGroupMembers {
+	background-color: #F2F2F2;
+	border-color: #808080;
+	border-style: solid;
+	border-width: 1px 1px;
+}
+
+.textareaExample {
+	background-color: lightgoldenRodYellow;
+}
+
+#divSearchNodegroups_c.yui-panel-container {
+	position:relative;
+}
+
+#divSearchNodegroups.yui-dialog {
+	position:relative;
+}
+
+#divSearchHistory_c.yui-panel-container {
+	position:relative;
+}
+
+#divSearchHistory_c.yui-dialog {
+	position:relative;
+}
+
+#divSearchEvents_c.yui-panel-container {
+	position:relative;
+}
+
+#divSearchEvents_c.yui-dialog {
+	position:relative;
+}
+
+#divSearchNodes_c.yui-panel-container {
+	position:relative;
+}
+
+#divSearchNodes.yui-dialog {
+	position:relative;
+}
+

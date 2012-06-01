@@ -7,7 +7,7 @@
    <div class="yui-gb footer">
     <div class="yui-u first">&nbsp;</div>
     <div class="yui-u align-center">&copy; 2012 Kimo Rosenbaum and Contributors. All Rights Reserved.</div>
-    <div class="yui-u align-right"><a href="https://github.com/kimor79/nodegroups-ui">github</a></div>
+    <div class="yui-u align-right"><a href="https://github.com/kimor79/nodegroups-webui">github</a></div>
    </div>
   </div>
  </div><!-- end ft -->

@@ -1,0 +1,76 @@
+.font-small {
+	font-size: 75%;
+}
+
+.footer {
+	font-size: 75%;
+}
+
+label {
+	font-weight: bold;
+}
+
+#masthead {
+	width: 100%;
+}
+
+#masthead, td {
+	border: 0;
+}
+
+#nav-main {
+	margin: 10px 0 15px 0;
+}
+
+#nodes-list {
+	height: 300px;
+	padding-left: 1%;
+	width: 400px;
+}
+
+.pre {
+	white-space: pre-wrap;
+}
+
+.txt-wrap {
+	max-width: 300px;
+	word-wrap: break-word;
+}
+
+.txt-wrap-long {
+	max-width: 600px;
+	word-wrap: break-word;
+}
+
+.wui-boxa table, .yui-dialog table {
+	border-collapse: collapse;
+	border: 0 none;
+	margin: 5px;
+	min-width: 66%;
+}
+
+.wui-boxa table td, .yui-dialog table td {
+	border: 0 none;
+	padding: 5px;
+}
+
+.yui-ge .scroll-box {
+	border-color: black;
+	border-style: outset;
+	border-width: 1px;
+	height: 100px;
+	margin-left: 1%;
+	overflow: auto;
+	padding-left: 1%;
+	padding-right: 1%;
+	white-space: pre;
+	width: 600px;
+}
+
+.yui-ge textarea {
+	height: 100px;
+	margin-left: 1%;
+	padding-left: 1%;
+	padding-right: 1%;
+	width: 600px;
+}

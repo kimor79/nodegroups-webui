@@ -3,7 +3,7 @@
 include_once 'nodegroups/webui/includes/init.php';
 include_once 'nodegroups/webui/includes/top.php';
 
-$details = $apiclient->getDetails('/v1/r/get_nodegroup.php', array(
+$details = $apiclient->getDetails('/v2/r/nodegroups/get_nodegroup.php', array(
 	'get' => array('nodegroup' => $wui->getGET('nodegroup'))));
 
 ?>
@@ -23,7 +23,7 @@ if(!$details) {
 
 <div class="yui-ge">
  <div class="yui-u first wui-boxa">
-  <form id="modify-nodegroup" method="POST" action="<?php echo $api_uri; ?>/v1/w/modify_nodegroup.php?outputFormat=json">
+  <form id="modify-nodegroup" method="POST" action="<?php echo $api_uri; ?>/v2/w/modify_nodegroup.php?outputFormat=json">
    <table>
     <tr>
      <td><label>Nodegroup: </label><?php echo $details['nodegroup']; ?></td>

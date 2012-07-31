@@ -18,7 +18,7 @@
 <div id="create-nodegroup" class="hidden">
  <div class="hd">Create Nodegroup</div>
  <div class="bd">
-  <form name="create-nodegroup" method="POST" action="<?php echo $api_uri; ?>/v1/w/create_nodegroup.php?outputFormat=json">
+  <form name="create-nodegroup" method="POST" action="<?php echo $api_uri; ?>/v2/w/create_nodegroup.php?outputFormat=json">
    <table>
     <tr>
      <td><label for="nodegroup">Nodegroup:</label></td>

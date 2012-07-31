@@ -3,7 +3,7 @@
 include_once 'nodegroups/webui/includes/init.php';
 include_once 'nodegroups/webui/includes/top.php';
 
-$details = $apiclient->getDetails('/v1/r/get_nodegroup.php', array(
+$details = $apiclient->getDetails('/v2/r/nodegroups/get_nodegroup.php', array(
 	'get' => array('nodegroup' => $wui->getGET('nodegroup'))));
 
 ?>
@@ -81,7 +81,7 @@ $wui->showSelfURN('/nodegroups/modify.php?nodegroup=' . $details['nodegroup']);
 <div id="set-nodegroup-order" class="hidden">
  <div class="hd">Set Order</div>
  <div class="bd">
-  <form name="set-nodegroup-order" method="POST" action="<?php echo $api_uri; ?>/v1/w/set_order.php?outputFormat=json">
+  <form name="set-nodegroup-order" method="POST" action="<?php echo $api_uri; ?>/v2/w/set_order.php?outputFormat=json">
    <input type="hidden" name="nodegroup" value="<?php echo $details['nodegroup']; ?>">
    <table>
     <tr>

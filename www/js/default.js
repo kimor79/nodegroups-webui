@@ -82,7 +82,7 @@ function modifyNodegroup() {
 		}
 	};
 
-	W.form.submitPOSTClick('modify-nodegroup', {
+	W.form.submitJSONClick('modify-nodegroup', {
 		failure: W.api.onFailure,
 		success: onSuccess
 	});
@@ -137,7 +137,7 @@ function removeNodegroupOrder(oDataTable) {
 }
 
 function searchNodegroups() {
-	var sUrl = api_uri + '/v1/r/search_nodegroups.php' +
+	var sUrl = api_uri + '/v2/r/nodegroups/get_nodegroups.php' +
 		'?outputFormat=json&outputFields=nodegroup,description';
 
 	var sQuery = W.getQueryString();
@@ -165,7 +165,7 @@ function searchNodegroups() {
 }
 
 function searchNodes() {
-	var sUrl = api_uri + '/v1/r/search_nodes.php?outputFormat=json';
+	var sUrl = api_uri + '/v2/r/nodes/get_counts.php?outputFormat=json';
 
 	var sQuery = W.getQueryString();
 	if(sQuery) {
@@ -177,10 +177,13 @@ function searchNodes() {
 			resizable: true, className: 'txt-wrap',
 			formatter: dTformatNodeName },
 		{ key: 'nodegroups', label: 'Nodegroups', sortable: true,
+			resizable: true, formatter: 'number' },
+		{ key: 'inherited', label: 'Inherited', sortable: true,
 			resizable: true, formatter: 'number' }
 	];
 
 	var oDataSource = W.ds.newDataSource(sUrl, [
+		{ key: 'inherited', parser: 'number' },
 		{ key: 'node' },
 		{ key: 'nodegroups', parser: 'number' }
 	]);
@@ -229,11 +232,11 @@ function setNodegroupOrder(oDataTable) {
 }
 
 function showNodeEvents(sNode) {
-	var sUrl = api_uri + '/v1/r/get_node_events.php?' +
+	var sUrl = api_uri + '/v2/r/events/get_events.php?' +
 		'outputFormat=json&node=' + encodeURIComponent(sNode);
 
 	var sColumns = [
-		{ key: 'c_time', label: 'Time', sortable: true,
+		{ key: 'timestamp', label: 'Time', sortable: true,
 			resizable: true, formatter: W.dt.formatDate },
 		{ key: 'user', label: 'User', sortable: true,
 			resizable: true, formatter: 'text' },
@@ -244,34 +247,39 @@ function showNodeEvents(sNode) {
 	];
 
 	var oDataSource = W.ds.newDataSource(sUrl, [
-		{ key: 'c_time', parser: W.ds.parseDate },
 		{ key: 'event' },
 		{ key: 'nodegroup' },
+		{ key: 'timestamp', parser: W.ds.parseDate },
 		{ key: 'user' }
 	]);
 
-	var oConfigs = W.dt.config('c_time', 25, 'desc');
+	var oConfigs = W.dt.config('timestamp', 25, 'desc');
 
 	var oDT = W.dt.newDataTable('node-events', sColumns,
 		oDataSource, oConfigs);
 }
 
 function showNodeNodegroups(sNode) {
-	var sUrl = api_uri + '/v1/r/list_nodegroups_from_nodes.php?' +
+	var sUrl = api_uri + '/v2/r/nodes/get_nodegroups.php?subDetails=1&' +
 		'outputFormat=json&node=' + encodeURIComponent(sNode);
 
 	var sColumns = [
-		{ key: 'nodegroup', label: 'Nodegroup', sortable: true,
+		{ field: 'nodegroup.nodegroup', key: 'nodegroup',
+			label: 'Nodegroup',sortable: true,
 			resizable: true, className: 'txt-wrap',
 			formatter: dTformatNodegroupName },
-		{ key: 'description', label: 'Description', sortable: true,
+		{ field: 'nodegroup.description',
+			label: 'Description', sortable: false,
 			resizable: true, className: 'txt-wrap-long',
-			formatter: 'text' }
+			formatter: 'text' },
+		{ key: 'inherited', label: 'Inherited', sortable: true,
+			resizable: true, formatter: W.dt.formatBool }
 	];
 
 	var oDataSource = W.ds.newDataSource(sUrl, [
-		{ key: 'description' },
-		{ key: 'nodegroup' }
+		{ key: 'inherited', parser: W.ds.parseBool },
+		{ key: 'nodegroup.description' },
+		{ key: 'nodegroup.nodegroup' }
 	]);
 
 	var oConfigs = W.dt.config('nodegroup', 100);
@@ -281,11 +289,11 @@ function showNodeNodegroups(sNode) {
 }
 
 function showNodegroupEvents(sNodegroup) {
-	var sUrl = api_uri + '/v1/r/get_nodegroup_events.php?' +
+	var sUrl = api_uri + '/v2/r/events/get_events.php?' +
 		'outputFormat=json&nodegroup=' + encodeURIComponent(sNodegroup);
 
 	var sColumns = [
-		{ key: 'c_time', label: 'Time', sortable: true,
+		{ key: 'timestamp', label: 'Time', sortable: true,
 			resizable: true, formatter: W.dt.formatDate },
 		{ key: 'user', label: 'User', sortable: true,
 			resizable: true, formatter: 'text' },
@@ -296,24 +304,24 @@ function showNodegroupEvents(sNodegroup) {
 	];
 
 	var oDataSource = W.ds.newDataSource(sUrl, [
-		{ key: 'c_time', parser: W.ds.parseDate },
 		{ key: 'event' },
 		{ key: 'node' },
+		{ key: 'timestamp', parser: W.ds.parseDate },
 		{ key: 'user' }
 	]);
 
-	var oConfigs = W.dt.config('c_time', 25, 'desc');
+	var oConfigs = W.dt.config('timestamp', 25, 'desc');
 
 	var oDT = W.dt.newDataTable('nodegroup-events', sColumns,
 		oDataSource, oConfigs);
 }
 
 function showNodegroupHistory(sNodegroup) {
-	var sUrl = api_uri + '/v1/r/get_nodegroup_history.php?' +
+	var sUrl = api_uri + '/v2/r/nodegroups/get_history.php?' +
 		'outputFormat=json&nodegroup=' + encodeURIComponent(sNodegroup);
 
 	var sColumns = [
-		{ key: 'c_time', label: 'Time', sortable: true,
+		{ key: 'timestamp', label: 'Time', sortable: true,
 			resizable: true, formatter: W.dt.formatDate },
 		{ key: 'user', label: 'User', sortable: true,
 			resizable: true, formatter: 'text' },
@@ -323,13 +331,13 @@ function showNodegroupHistory(sNodegroup) {
 
 	var oDataSource = W.ds.newDataSource(sUrl, [
 		{ key: 'action' },
-		{ key: 'c_time', parser: W.ds.parseDate },
 		{ key: 'description' },
 		{ key: 'expression' },
+		{ key: 'timestamp', parser: W.ds.parseDate },
 		{ key: 'user' }
 	]);
 
-	var oConfigs = W.dt.config('c_time', 25, 'desc');
+	var oConfigs = W.dt.config('timestamp', 25, 'desc');
 
 	var oDT = W.dt.newDataTable('nodegroup-history', sColumns,
 		oDataSource, oConfigs);
@@ -365,12 +373,12 @@ function showNodegroupHistory(sNodegroup) {
 }
 
 function showNodegroupOrder(sNodegroup) {
-	var sUrl = api_uri + '/v1/r/get_nodegroup_order.php?' +
+	var sUrl = api_uri + '/v2/r/order/get_orderings.php?' +
 		'outputFormat=json&nodegroup=' + encodeURIComponent(sNodegroup);
 
 	var sColumns = [
 		{ key: 'order', label: 'Order', sortable: true,
-			resizable: true },
+			resizable: true, format: 'number' },
 		{ key: 'app', label: 'App', sortable: true,
 			resizable: true, formatter: 'text' },
 		{ key: '_remove', label: '',
@@ -405,7 +413,7 @@ function showNodegroupOrder(sNodegroup) {
 	var showRemove = function(oRecord) {
 		var sApp = oRecord.getData('app');
 		var sForm = '<form method="POST" action="' + api_uri +
-			'/v1/w/remove_order.php?outputFormat=json">' +
+			'/v2/w/remove_order.php?outputFormat=json">' +
 			'<input type="hidden" name="nodegroup" value="' +
 			encodeURIComponent(sNodegroup) + '">' +
 			'<input type="hidden" name="app" value="' +
@@ -429,7 +437,7 @@ function showNodegroupOrder(sNodegroup) {
 }
 
 function showNodesList(sNodegroup, sId) {
-	var sUrl = api_uri + '/v1/r/list_nodes.php?' +
+	var sUrl = api_uri + '/v2/r/nodegroups/get_nodes.php?' +
 		'outputFormat=list&nodegroup=' + encodeURIComponent(sNodegroup);
 
 	YAHOO.util.Connect.asyncRequest('GET', sUrl, {
@@ -443,17 +451,25 @@ function showNodesList(sNodegroup, sId) {
 }
 
 function showPreview(sExpression, sId) {
-	var sUrl = api_uri + '/v1/r/list_nodes.php?outputFormat=list&' +
-		'expression=' + encodeURIComponent(sExpression);
+	var sUrl = api_uri + '/v2/r/expression/parse_expression.php?' +
+		'outputFormat=json';
 
-	YAHOO.util.Connect.asyncRequest('GET', sUrl, {
+	YAHOO.util.Connect.asyncRequest('POST', sUrl, {
 		failure: function(o) {
-			document.getElementById(sId).innerHTML = o.statusText;
+			document.getElementById(sId).innerHTML = '';
+			W.api.onFailure(o);
 		},
 		success: function(o) {
-			document.getElementById(sId).innerHTML = o.responseText;
+			var oOutput = W.api.onSuccess(o);
+			if(oOutput) {
+				YAHOO.util.Dom.addClass(
+					document.getElementById('wui-status'),
+					'hidden');
+				document.getElementById(sId).innerHTML =
+					oOutput.details.nodes.join("\n");
+			}
 		}
-	});
+	}, 'expression=' + encodeURIComponent(sExpression));
 }
 
 YAHOO.util.Event.onDOMReady(function() {

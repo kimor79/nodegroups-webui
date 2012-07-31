@@ -3,7 +3,7 @@
 include_once 'nodegroups/webui/includes/init.php';
 include_once 'nodegroups/webui/includes/top.php';
 
-$saveas_url = $api_uri . '/v1/r/search_nodes.php?';
+$saveas_url = $api_uri . '/v2/r/nodes/get_counts.php?';
 
 if(array_key_exists('QUERY_STRING', $_SERVER) &&
 		$_SERVER['QUERY_STRING'] != '') {

@@ -14,7 +14,7 @@ include_once 'nodegroups/webui/includes/top.php';
     </tr>
     <tr>
      <td>
-      <textarea name="expression"><?php echo htmlentities($wui->getGET('expression')); ?></textarea>
+      <textarea name="expression"><?php $wui->showGET('expression'); ?></textarea>
      </td>
     </tr>
    </table>

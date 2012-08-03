@@ -41,5 +41,5 @@ include_once 'nodegroups/webui/includes/bottom.php';
 
 ?>
 <script type="text/javascript">
-sNode = '<?php $wui->showGET('node'); ?>';
+sNode = <?php $wui->showJSValue($wui->getGET('node')); ?>
 </script>

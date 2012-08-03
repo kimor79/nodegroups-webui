@@ -25,14 +25,14 @@ if(!$details) {
  <div class="yui-u first wui-boxa">
   <table>
    <tr>
-    <td><label>Nodegroup: </label><?php echo $details['nodegroup']; ?></td>
+    <td><label>Nodegroup: </label><?php $wui->showHTMLValue($details['nodegroup']); ?></td>
    </tr>
    <tr>
     <td><label>Description:</label></td>
    </tr>
    <tr>
     <td>
-     <div class="scroll-box"><?php echo $details['description']; ?></div>
+     <div class="scroll-box"><?php $wui->showHTMLValue($details['description']); ?></div>
     </td>
    </tr>
    <tr>
@@ -40,13 +40,13 @@ if(!$details) {
    </tr>
    <tr>
     <td>
-     <div class="scroll-box"><?php echo htmlentities($details['expression']); ?></div>
+     <div class="scroll-box"><?php $wui->showHTMLValue($details['expression']); ?></div>
     </td>
    </tr>
   </table>
   <div class="align-right">
    <a class="a-button" href="<?php
-$wui->showSelfURN('/nodegroups/modify.php?nodegroup=' . $details['nodegroup']);
+$wui->showSelfURN('/nodegroups/modify.php?nodegroup=' . urlencode($details['nodegroup']));
 ?>"><button>Modify</button></a>
   </div>
  </div>
@@ -82,7 +82,7 @@ $wui->showSelfURN('/nodegroups/modify.php?nodegroup=' . $details['nodegroup']);
  <div class="hd">Set Order</div>
  <div class="bd">
   <form name="set-nodegroup-order" method="POST" action="<?php echo $api_uri; ?>/v2/w/set_order.php?outputFormat=json">
-   <input type="hidden" name="nodegroup" value="<?php echo $details['nodegroup']; ?>">
+   <input type="hidden" name="nodegroup" value="<?php $wui->showHTMLValue($details['nodegroup']); ?>">
    <table>
     <tr>
      <td><label for="order">Order:</label></td>
@@ -105,7 +105,7 @@ include_once 'nodegroups/webui/includes/bottom.php';
 if($details) {
 ?>
 <script type="text/javascript">
-sNodegroup = '<?php echo $details['nodegroup']; ?>';
+sNodegroup = <?php $wui->showJSValue($details['nodegroup']); ?>
 </script>
 <?php
 }

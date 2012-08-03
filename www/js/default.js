@@ -357,8 +357,10 @@ function showNodegroupHistory(sNodegroup) {
 	oDT.subscribe('rowClickEvent', function(oArgs) {
 		var oTarget = oArgs.target;
 		var oRecord = this.getRecord(oTarget);
-		var sDesc = oRecord.getData('description');
-		var sExpr = oRecord.getData('expression');
+		var sDesc =
+			YAHOO.lang.escapeHTML(oRecord.getData('description'));
+		var sExpr =
+			YAHOO.lang.escapeHTML(oRecord.getData('expression'));
 
 		oPanel.setBody('<table>' +
 			'<tr><td>Description</td><td>Expression</td></tr>' +

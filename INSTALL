@@ -8,7 +8,7 @@ The nodegroups web UI requires the following:
 * api_consumer (https://github.com/kimor79/api_consumer)
 * webui_producer (https://github.com/kimor79/webui_producer)
 
-Copy the files in php/ to a path in php's include_path. E.g.:
+Copy the files in php/ to <php include path>/nodegroups/webui/. E.g.:
   mkdir /usr/local/include/php/nodegroups
   cp -R php /usr/local/include/php/nodegroups/webui
 

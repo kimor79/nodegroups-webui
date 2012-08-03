@@ -2,16 +2,15 @@
 
 define('WEBUI_PRODUCER_MYAPP', 'nodegroups_webui');
 
+include 'api_consumer/v2/classes/consumer.php';
+include 'webui_producer/v2/classes/base.php';
+
 try {
-	include 'webui_producer/v2/classes/base.php';
+	$wui = new WebUIProducerV2Base();
 } catch (Exception $e) {
 	echo $e->getMessage();
 	exit(0);
 }
-
-include 'api_consumer/v2/classes/consumer.php';
-
-$wui = new WebUIProducerV2Base();
 
 $api_uri = $wui->buildURI('nodegroups-api');
 $api_uri = rtrim($api_uri, '/');

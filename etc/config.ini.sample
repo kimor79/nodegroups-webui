@@ -1,0 +1,21 @@
+; See the docs in webui_producer on ways to specify URLs.
+
+; If the nodegroups web UI is not at the root of the webserver
+; you will need to set base_urn. E.g.:
+;  base_urn = "/nodegroups/webui"
+
+[nodegroups-api]
+; Define the location of the nodegroups API here.
+
+[silk-icons]
+; Define the location of the Silk icon set here.
+
+[webui]
+; Define the location of webui_producer files here.
+;base_urn = "/webui_producer/"
+base_css = "/v1/css/base.css"
+base_js = "/v2/js/base.js"
+
+[yui]
+; Define the location of yui files here.
+base_uri = "http://yui.yahooapis.com/2.9.0/build/"

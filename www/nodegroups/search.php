@@ -40,8 +40,8 @@ if(array_key_exists('QUERY_STRING', $_SERVER) &&
 
 <div>
 Save results as:&nbsp;
-<a href="<? echo $saveas_url . 'outputFormat=csv'; ?>">CSV</a> |&nbsp;
-<a href="<? echo $saveas_url . 'outputFormat=json'; ?>">JSON</a>
+<a href="<?php echo $saveas_url . 'outputFormat=csv'; ?>">CSV</a> |&nbsp;
+<a href="<?php echo $saveas_url . 'outputFormat=json'; ?>">JSON</a>
 </div>
 
 <div id="search-results"></div>
